@@ -14,6 +14,7 @@ app.use(express.urlencoded({ extended: false }));
 const router = require('./routes');
 const userRouter = require('./routes/users');
 const postsRouter = require('./routes/posts');
+const boardsRouter = require('./routes/boards');
 // const postsRouter = express.Router();
 
 app.set('view engine', 'ejs');
@@ -23,11 +24,12 @@ app.use('/', router);
 app.use('/users', userRouter);
 // userRouter부를 땐 이 주소 /users로 가져오겠다
 app.use('/posts', postsRouter);
+app.use('/boards', boardsRouter);
 
 app.use(express.static('public'));
 // 프론트 파일
 
-// 꼭 서버실행(listen) 바로 위에 잇어야함. =맨 밑에 있어야함
+// 꼭 서버실행(listen) 바로 위에 있어야함. =맨 밑에 있어야함
 app.use((err, req, res, next) => {
   console.log(err.stack);
   res.status(err.statusCode || 500);
