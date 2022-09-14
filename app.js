@@ -12,19 +12,21 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 const router = require('./routes');
+// ./routes/index와 같은 말, index,js
 const userRouter = require('./routes/users');
 const postsRouter = require('./routes/posts');
-const boardsRouter = require('./routes/boards');
+const boardsRouter = require('./routes/board');
 // const postsRouter = express.Router();
 
 app.set('view engine', 'ejs');
 app.set('views', 'views');
 
 app.use('/', router);
+// 'localhost:4000/이 숨어있는 것'
 app.use('/users', userRouter);
 // userRouter부를 땐 이 주소 /users로 가져오겠다
 app.use('/posts', postsRouter);
-app.use('/boards', boardsRouter);
+app.use('/board', boardsRouter);
 
 app.use(express.static('public'));
 // 프론트 파일
@@ -38,5 +40,5 @@ app.use((err, req, res, next) => {
 
 app.listen(PORT, () => {
   console.log(`The express server is running at ${PORT}`);
-  console.log(`http://localhost:${PORT}`);
+  // console.log(`http://localhost:${PORT}`);
 });
